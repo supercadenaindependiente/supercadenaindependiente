@@ -1,0 +1,335 @@
+body {
+    background-color: #0b0710;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Barra de navegación superior estilo RCN */
+.navbar-rcn {
+    background-color: #120d1c;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 30px;
+    border-bottom: 1px solid #231b32;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.logo-box {
+    background-color: #ff4757;
+    color: white;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+}
+
+.nav-left nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-left nav a {
+    color: #b2bec3;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-left nav a:hover {
+    color: #ffffff;
+}
+
+.btn-ingresar {
+    background-color: #261f36;
+    color: #fff;
+    border: 1px solid #3c3254;
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-ingresar:hover {
+    background-color: #3c3254;
+}
+
+/* Título de sección */
+.titulo-emisoras {
+    text-align: center;
+    margin: 40px 0 20px 0;
+}
+
+.titulo-emisoras h2 {
+    font-size: 1.2rem;
+    letter-spacing: 1.5px;
+    color: #e0e0e0;
+    font-weight: 600;
+}
+
+/* Contenedor de Tarjetas de Emisoras */
+.emisoras-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 0 20px;
+    flex-wrap: wrap;
+}
+
+.emisoras-container a {
+    text-decoration: none;
+}
+
+.tarjeta {
+    background: #191227;
+    border: 1px solid #2d2342;
+    border-radius: 10px;
+    padding: 15px;
+    width: 280px;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.tarjeta:hover {
+    transform: translateY(-4px);
+    border-color: #ff4757;
+}
+
+.tarjeta img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+/* Secciones Institucionales Estilo Portal Pro */
+.seccion-institucional {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.seccion-institucional h3 {
+    font-size: 1.2rem;
+    letter-spacing: 1.5px;
+    color: #ffffff;
+    margin-bottom: 25px;
+    border-left: 4px solid #ff4757;
+    padding-left: 12px;
+    text-transform: uppercase;
+}
+
+.institucional-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.inst-card {
+    background: linear-gradient(145deg, #161022, #1c142d);
+    border: 1px solid #2d2342;
+    border-radius: 12px;
+    padding: 25px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Línea superior brillante al pasar el cursor por las tarjetas */
+.inst-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #ff4757;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.inst-card:hover {
+    transform: translateY(-6px);
+    border-color: #ff4757;
+    box-shadow: 0 10px 25px rgba(255, 71, 87, 0.12);
+}
+
+.inst-card:hover::before {
+    opacity: 1;
+}
+
+.inst-card h4 {
+    margin: 0 0 12px 0;
+    color: #ffffff;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.inst-card p {
+    margin: 0;
+    color: #b8b0c8;
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+/* Footer Corporativo */
+.footer-rcn {
+    background-color: #07040b;
+    border-top: 1px solid #231b32;
+    color: #8c829c;
+    padding: 40px 20px 20px 20px;
+    margin-top: 80px;
+}
+
+.footer-content {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-start;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #1c1528;
+}
+
+.footer-links-group h4 {
+    color: #e0e0e0;
+    font-size: 0.95rem;
+    margin: 0 0 12px 0;
+    letter-spacing: 1px;
+}
+
+.links-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.links-row a, .footer-legal a {
+    color: #8c829c;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+}
+
+.links-row a:hover, .footer-legal a:hover {
+    color: #ffffff;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-top: 20px;
+    font-size: 0.8rem;
+}
+
+.footer-legal {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Contenedor flexible para alinear el botón y el selector */
+.stream-action-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* Estilo del selector de ciudad similar al de las grandes cadenas */
+.select-ciudad {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border: 1px solid #333333;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    min-width: 200px;
+}
+
+.select-ciudad:hover, .select-ciudad:focus {
+    border-color: #555555;
+    background-color: #222222;
+}
+
+.select-ciudad option {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+
+/* FONDO DIFUMINADO Y AMBIENTAL */
+.fondo-difuminado-blur {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(5, 7, 12, 0.85), rgba(5, 7, 12, 0.85)), url('basica.png');
+    background-size: cover;
+    background-position: center;
+    filter: blur(40px);
+    transform: scale(1.1);
+    z-index: -1;
+}
+
+/* ADAPTACIÓN AUTOMÁTICA A CELULARES Y TABLETS (RESPONSIVE) */
+@media (max-width: 768px) {
+    .navbar-rcn {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px 15px;
+    }
+
+    .nav-left {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .nav-left nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 15px;
+    }
+
+    .nav-left nav a {
+        font-size: 0.85rem;
+    }
+
+    .btn-ingresar {
+        width: 100%;
+        text-align: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+}

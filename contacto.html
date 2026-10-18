@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - S.C.I. Super Cadena Independiente</title>
+    <link rel="icon" type="image/png" href="logotv.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #08080c;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .logo-box-img img {
+            height: 42px;
+            width: auto;
+            border-radius: 6px;
+        }
+
+        .hero-banner {
+            background: linear-gradient(180deg, #18122b 0%, #08080c 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+        }
+
+        .btn-volver {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .btn-volver:hover {
+            background: #ff0055;
+        }
+
+        .main-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card-contacto {
+            background: #111118;
+            border-radius: 14px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+        }
+
+        .card-contacto h3 {
+            color: #ffcc00;
+            margin-top: 0;
+        }
+
+        .btn-whatsapp {
+            display: inline-block;
+            background-color: #25d366;
+            color: #000;
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: transform 0.2s;
+        }
+
+        .btn-whatsapp:hover {
+            transform: scale(1.05);
+        }
+
+        .form-contacto input, .form-contacto textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #222233;
+            background: #0b0b10;
+            color: #fff;
+            box-sizing: border-box;
+        }
+
+        .btn-enviar {
+            background: #ff0055;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-enviar:hover {
+            background: #e0004c;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar-rcn">
+        <div class="nav-left">
+            <a href="index.html" class="logo-box-img">
+                <img src="logotv.png" alt="S.C.I. Logo">
+            </a>
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href="sintoniza.html">Sintoniza</a>
+                <a href="contacto.html" style="color:#ff0055; font-weight:bold;">Contacto</a>
+                <a href="redes-sociales.html">Redes Sociales</a>
+                <a href="donaciones.html">Donaciones</a>
+                <a href="publicidad.html">Publicidad</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-banner">
+        <a href="index.html" class="btn-volver">&lt; VOLVER AL INICIO</a>
+        <h1>Línea Directa y Contacto</h1>
+        <p>Comunícate con la mesa de trabajo de Super Radio FM y S.C.I. Televisión</p>
+    </section>
+
+    <main class="main-container">
+        <div class="contact-grid">
+            <div class="card-contacto">
+                <h3>💬 WhatsApp de Estudio</h3>
+                <p>Escríbenos para enviar tus saludos, reportes de sintonía o pedir tus canciones favoritas en vivo.</p>
+                <a href="https://wa.me/573248748285" target="_blank" class="btn-whatsapp">ABRIR WHATSAPP EN VIVO</a>
+            </div>
+
+            <div class="card-contacto">
+                <h3>✉️ Mensaje Directo</h3>
+                <form class="form-contacto" onsubmit="event.preventDefault(); alert('¡Mensaje enviado con éxito a la mesa de producción!');">
+                    <input type="text" placeholder="Tu Nombre o Seudónimo" required>
+                    <input type="email" placeholder="Tu Correo Electrónico" required>
+                    <textarea rows="4" placeholder="Escribe tu mensaje o reporte de sintonía..." required></textarea>
+                    <button type="submit" class="btn-enviar">ENVIAR MENSAJE</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-rcn">
+        <div class="footer-content">
+            <p>&copy; 2026 S.C.I. Super Cadena Independiente. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

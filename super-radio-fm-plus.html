@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Radio Fm Plus - S.C.I.</title>
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="plus.png">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0b0f19;
+            color: #ffffff;
+        }
+        .navbar-rcn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #121824;
+            padding: 10px 30px;
+            border-bottom: 1px solid #1f293d;
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        /* LOGO DE IMAGEN EN EL HEADER */
+        .logo-box-img {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        .logo-box-img img {
+            height: 40px;
+            width: auto;
+            border-radius: 6px;
+            object-fit: contain;
+        }
+        .nav-left nav a {
+            color: #b0b8c4;
+            text-decoration: none;
+            margin-right: 15px;
+            font-size: 0.95rem;
+        }
+        .nav-left nav a:hover {
+            color: #ffffff;
+        }
+        .btn-ingresar {
+            background-color: transparent;
+            border: 1px solid #3a4760;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .btn-volver {
+            display: inline-block;
+            margin: 20px 40px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 6px;
+        }
+        .hero-emisora {
+            background: linear-gradient(135deg, hsl(277, 78%, 47%), #5b0d6b);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 4px solid #ffae00;
+        }
+        .hero-emisora img {
+            max-width: 220px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+        .contenido-programa {
+            max-width: 900px;
+            margin: 40px auto;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            background: #121824;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #1f293d;
+        }
+        .contenido-programa img {
+            width: 280px;
+            border-radius: 10px;
+        }
+        .btn-escuchar {
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 10px 24px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
+        }
+        .btn-escuchar:hover {
+            background-color: #ff0055;
+            color: #ffffff;
+        }
+        .select-ciudad {
+            background-color: #121824;
+            color: #ffffff;
+            border: 1px solid #3a4760;
+            padding: 10px 15px;
+            border-radius: 8px;
+            outline: none;
+            margin-top: 15px;
+            margin-left: 10px;
+        }
+
+        /* BARRA REPRODUCTOR FLOTANTE INFERIOR */
+        .reproductor-flotante {
+            position: fixed;
+            bottom: -120px;
+            left: 0;
+            width: 100%;
+            background-color: #0b0f19;
+            border-top: 2px solid #1a4cd6;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 30px;
+            box-sizing: border-box;
+            z-index: 1000;
+            transition: all 0.4s ease-in-out;
+        }
+        .reproductor-flotante.visible {
+            bottom: 0;
+        }
+
+        /* ESTILO MODO AMPLIADO */
+        .reproductor-flotante.ampliado {
+            top: 0;
+            bottom: 0;
+            height: 100vh;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+            padding: 40px;
+            border-top: none;
+            overflow: hidden;
+        }
+
+        .fondo-difuminado-blur {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(5, 7, 12, 0.88), rgba(5, 7, 12, 0.88)), url('plus.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(40px);
+            transform: scale(1.1);
+            z-index: -1;
+        }
+        .reproductor-flotante.ampliado .fondo-difuminado-blur {
+            display: block;
+        }
+
+        .reproductor-flotante.ampliado .player-info-left {
+            display: none;
+        }
+        .reproductor-flotante.ampliado .player-controls-center {
+            margin-top: 15px;
+            z-index: 2;
+        }
+        .reproductor-flotante.ampliado .player-extra-right {
+            display: none; 
+        }
+
+        .vista-ampliada-contenido {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 10px;
+            z-index: 2;
+            width: 100%;
+            max-width: 450px;
+        }
+        .reproductor-flotante.ampliado .vista-ampliada-contenido {
+            display: flex;
+        }
+        .vista-ampliada-contenido img {
+            width: 240px;
+            height: 240px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+            margin-bottom: 15px;
+        }
+
+        .tiempo-streaming-container {
+            width: 100%;
+            margin-top: 15px;
+        }
+        .tiempos-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #b0b8c4;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .barra-progreso-interactiva {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            outline: none;
+            cursor: pointer;
+            accent-color: #ffffff;
+        }
+        .barra-progreso-interactiva::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(0,0,0,0.6);
+            transition: transform 0.1s;
+        }
+        .barra-progreso-interactiva::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .badge-aire-pill {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin: 12px 0 8px 0;
+        }
+        .badge-aire-pill span {
+            width: 6px;
+            height: 6px;
+            background-color: #ff0055;
+            border-radius: 50%;
+            box-shadow: 0 0 6px #ff0055;
+        }
+
+        .vista-ampliada-contenido h3 {
+            color: #ffffff;
+            font-size: 1.4rem;
+            margin: 0;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        /* BOTÓN MINIMIZAR ARRIBA A LA DERECHA */
+        .contenedor-botones-superiores {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+
+        .btn-minimizar {
+            background: rgba(0,0,0,0.5);
+            color: #ffffff;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-size: 1rem;
+        }
+        .btn-minimizar:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .player-info-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .player-info-left img {
+            height: 35px;
+            width: auto;
+            border-radius: 4px;
+        }
+        .player-text-meta h4 {
+            color: #ffffff;
+            margin: 0;
+            font-size: 1rem;
+        }
+        .player-text-meta p {
+            color: #999999;
+            margin: 0;
+            font-size: 0.85rem;
+        }
+
+        /* CONTROLES CENTRO */
+        .player-controls-center {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+        }
+        .btn-control-aux {
+            background: transparent;
+            color: #b0b8c4;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .btn-control-aux:hover {
+            color: #ffffff;
+        }
+        .btn-player-circle {
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        /* CONTENEDOR DE VOLUMEN CON BARRA DESPLEGABLE POR CLIC */
+        .volumen-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .slider-volumen-flotante {
+            display: none;
+            position: absolute;
+            bottom: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #121824;
+            border: 1px solid #3a4760;
+            padding: 12px 10px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+            z-index: 100;
+        }
+        .slider-volumen-flotante.activo {
+            display: block;
+        }
+        .slider-volumen-flotante input[type="range"] {
+            -webkit-appearance: slider-vertical;
+            appearance: slider-vertical;
+            width: 8px;
+            height: 90px;
+            accent-color: #1a4cd6;
+            cursor: pointer;
+        }
+
+        /* ESPACIO DERECHO */
+        .player-extra-right {
+            display: flex;
+            align-items: center;
+            min-width: 150px;
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar-rcn">
+        <div class="nav-left">
+            <a href="index.html" class="logo-box-img">
+                <img src="plus.png" alt="S.C.I. Logo">
+            </a>
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href="programas.html">Programas</a>
+                <a href="emisoras.html">Emisoras</a>
+            </nav>
+        </div>
+        <div class="nav-right">
+            <button class="btn-ingresar">Ingresar</button>
+        </div>
+    </header>
+
+    <a href="index.html" class="btn-volver">&lt; VOLVER</a>
+
+    <div class="hero-emisora">
+        <img src="plus.png" alt="Logo Super Radio Fm Plus">
+        <h1>Super Radio Fm Plus</h1>
+        <p>Super Radio Fm Plus - El mundo del rock de la S.C.I.</p>
+    </div>
+
+    <main class="contenido-programa">
+        <img src="plus.png" alt="Programa en vivo">
+        <div class="info-programa">
+            <h2>Estudio Principal en Vivo</h2>
+            <p>Disfruta de la mejor programación rock

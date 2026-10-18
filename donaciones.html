@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donaciones y Apoyo - S.C.I.</title>
+    <link rel="icon" type="image/png" href="logotv.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background-color: #08080c; color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; }
+        .logo-box-img img { height: 42px; border-radius: 6px; }
+        .hero-banner { background: linear-gradient(180deg, #18122b 0%, #08080c 100%); padding: 40px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.08); position: relative; }
+        .btn-volver { position: absolute; top: 20px; left: 30px; background: rgba(255,255,255,0.1); color: #fff; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; }
+        .main-container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        .dona-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card-dona { background: #111118; border-radius: 14px; padding: 25px; border: 1px solid rgba(255,255,255,0.08); text-align: center; display: flex; flex-direction: column; justify-content: space-between; }
+        .card-dona h3 { margin-top: 0; }
+        .card-nequi { border-color: #e20074; }
+        .card-nequi h3 { color: #e20074; }
+        .card-paypal { border-color: #0079c1; }
+        .card-paypal h3 { color: #0079c1; }
+        .nota-nequi { background: rgba(226, 0, 116, 0.1); border: 1px solid rgba(226, 0, 116, 0.3); border-radius: 8px; padding: 12px; font-size: 12px; color: #ffb3da; margin: 12px 0; text-align: left; line-height: 1.4; }
+        .btn-dona { display: inline-block; padding: 10px 20px; border-radius: 20px; font-weight: bold; text-decoration: none; color: #fff; margin-top: 10px; transition: transform 0.2s; }
+        .btn-dona:hover { transform: scale(1.03); }
+    </style>
+</head>
+<body>
+
+    <header class="navbar-rcn">
+        <div class="nav-left">
+            <a href="index.html" class="logo-box-img"><img src="logotv.png" alt="S.C.I. Logo"></a>
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href="sintoniza.html">Sintoniza</a>
+                <a href="contacto.html">Contacto</a>
+                <a href="redes-sociales.html">Redes Sociales</a>
+                <a href="donaciones.html" style="color:#00ff88; font-weight:bold;">Donaciones</a>
+                <a href="publicidad.html">Publicidad</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-banner">
+        <a href="index.html" class="btn-volver">&lt; VOLVER AL INICIO</a>
+        <h1>Apoya la Comunicación Independiente</h1>
+        <p>Tus aportes nos ayudan a mantener los servidores de streaming y la producción en vivo de la S.C.I.</p>
+    </section>
+
+    <main class="main-container">
+        <div class="dona-grid">
+            <div class="card-dona card-nequi">
+                <div>
+                    <div style="font-size: 35px;">📱</div>
+                    <h3>Nequi Colombia</h3>
+                    <p>Apoya el proyecto radial directamente desde tu celular en Colombia.</p>
+                    <div class="nota-nequi">
+                        📌 <strong>Nota importante:</strong> La línea telefónica principal de la emisora no tiene Nequi habilitado. Haz clic en el botón para enviarnos un mensaje de WhatsApp y te daremos el número oficial para la transferencia.
+                    </div>
+                </div>
+                <a href="https://wa.me/3248748285?text=Hola,%20deseo%20realizar%20un%20aporte%20v%C3%ADa%20Nequi%20para%20Super%20Radio%20FM" target="_blank" class="btn-dona" style="background:#e20074;">SOLICITAR NÚMERO NEQUI</a>
+            </div>
+
+            <div class="card-dona card-paypal">
+                <div>
+                    <div style="font-size: 35px;">🌎</div>
+                    <h3>PayPal Mundo</h3>
+                    <p>Donaciones internacionales para mantener la infraestructura y servidores de la S.C.I.</p>
+                </div>
+                <a href="https://www.paypal.com/donate/?hosted_button_id=FZMMG6RVAC49C" target="_blank" class="btn-dona" style="background:#0079c1;">APOYAR VÍA PAYPAL</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-rcn"><p style="text-align:center; padding: 20px; color: #666;">&copy; 2026 S.C.I. Super Cadena Independiente.</p></footer>
+
+</body>
+</html>

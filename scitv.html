@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.C.I. Televisión - Super Cadena Independiente</title>
+    <!-- FAVICON (Ícono de pestaña) -->
+    <link rel="icon" type="image/png" href="logotv.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        body {
+            background-color: #0b0b10;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* HEADER Y LOGO DE IMAGEN */
+        .navbar-rcn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            background-color: #12121a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-box-img {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-box-img img {
+            height: 45px;
+            width: auto;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+
+        /* BANNER AMARILLO DORADO CON LÍNEA INSTITUCIONAL */
+        .hero-banner {
+            background: linear-gradient(180deg, #4a3800 0%, #241b00 100%);
+            padding: 40px 20px 50px 20px;
+            text-align: center;
+            border-bottom: 3px solid #e6005c;
+            position: relative;
+        }
+
+        .btn-volver {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            background: rgba(0, 0, 0, 0.4);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid rgba(255, 204, 0, 0.3);
+            transition: all 0.3s;
+        }
+
+        .btn-volver:hover {
+            background: #ffcc00;
+            color: #000;
+        }
+
+        .hero-logo {
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(255, 204, 0, 0.25);
+            margin-bottom: 15px;
+        }
+
+        .hero-title {
+            font-size: 28px;
+            margin: 0 0 8px 0;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 0;
+        }
+
+        .main-content {
+            max-width: 900px;
+            margin: -30px auto 50px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .player-card {
+            background-color: #12121a;
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(255, 204, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .player-info h3 {
+            font-size: 22px;
+            margin: 0 0 10px 0;
+            color: #ffcc00;
+        }
+
+        .player-info p {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.5;
+            margin: 0 0 20px 0;
+        }
+
+        /* BARRA SEÑAL EN DIRECTO */
+        .live-status-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 204, 0, 0.08);
+            border: 1px solid rgba(255, 204, 0, 0.25);
+            padding: 10px 16px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dot-live {
+            height: 10px;
+            width: 10px;
+            background-color: #ff0055;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px #ff0055;
+            animation: parpadeo 1.2s infinite;
+        }
+
+        .text-live {
+            color: #ffcc00;
+            font-weight: bold;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .quality-tag {
+            color: #888899;
+            font-size: 12px;
+        }
+
+        @keyframes parpadeo {
+            0% { opacity: 1; }
+            50% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+
+        .video-container {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        video {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16 / 9;
+        }
+
+        @media (max-width: 768px) {
+            .btn-volver {
+                position: static;
+                display: inline-block;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA DE NAVEGACIÓN CON LOGO DE IMAGEN Y SIN MENÚ NAV -->
+    <header class="navbar-rcn">
+        <div class="nav-left">
+            <a href="index.html" class="logo-box-img">
+                <img src="logotv.png" alt="S.C.I. Logo">
+            </a>
+        </div>
+        <div class="nav-right">
+            <button class="btn-ingresar">Ingresar</button>
+        </div>
+    </header>
+
+    <section class="hero-banner">
+        <a href="index.html" class="btn-volver">&lt; VOLVER</a>
+        <img src="logotv.png" alt="S.C.I. Televisión Logo" class="hero-logo">
+        <h1 class="hero-title">S.C.I. Televisión</h1>
+        <p class="hero-subtitle">S.C.I. Televisión - El canal oficial en vivo de la S.C.I.</p>
+    </section>
+
+    <main class="main-content">
+        <div class="player-card">
+            <div class="player-info">
+                <h3>Señal Principal en Vivo</h3>
+                <p>Disfruta de la mejor programación, eventos y noticias transmitidos en directo para toda la S.C.I.</p>
+
+                <!-- BANNER DE ESTADO EN VIVO -->
+                <div class="live-status-bar">
+                    <div class="live-indicator">
+                        <span class="dot-live"></span>
+                        <span class="text-live">SEÑAL EN DIRECTO</span>
+                    </div>
+                    <span class="quality-tag">HD 1080p | S.C.I. TV</span>
+                </div>
+
+                <div class="video-container">
+                    <video id="reproductor-scitv" controls autoplay poster="logotv.png"></video>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-rcn">
+        <div class="footer-content">
+            <div class="footer-bottom">
+                <p>&copy; 2026 S.C.I. super cadena independiente. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        var video = document.getElementById('reproductor-scitv');
+        var videoSrc = 'https://scitv.loca.lt/hls/stream.m3u8';
+
+        if (Hls.isSupported()) {
+            var hls = new Hls({
+                enableWorker: true,
+                lowLatencyMode: true,
+            });
+            hls.loadSource(videoSrc);
+            hls.attachMedia(video);
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = videoSrc;
+        }
+    </script>
+
+</body>
+</html>

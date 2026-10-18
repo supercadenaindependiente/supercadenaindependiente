@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sintoniza - S.C.I.</title>
+    <link rel="icon" type="image/png" href="logotv.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background-color: #08080c; color: #fff; font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; }
+        .logo-box-img img { height: 42px; border-radius: 6px; }
+        .hero-banner { background: linear-gradient(180deg, #18122b 0%, #08080c 100%); padding: 40px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.08); position: relative; }
+        .btn-volver { position: absolute; top: 20px; left: 30px; background: rgba(255,255,255,0.1); color: #fff; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; }
+        .main-container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        .sintoniza-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .card-dir { background: #111118; border-radius: 14px; padding: 25px; border: 1px solid rgba(255,255,255,0.08); text-align: center; }
+        .card-dir h3 { margin-top: 0; color: #ff0055; }
+        .btn-ver-mas { display: inline-block; background: rgba(255,255,255,0.1); color: #fff; text-decoration: none; padding: 8px 18px; border-radius: 20px; font-weight: bold; margin-top: 10px; border: 1px solid rgba(255,255,255,0.2); }
+        .btn-ver-mas:hover { background: #ff0055; }
+    </style>
+</head>
+<body>
+
+    <header class="navbar-rcn">
+        <div class="nav-left">
+            <a href="index.html" class="logo-box-img"><img src="logotv.png" alt="S.C.I. Logo"></a>
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href="sintoniza.html" style="color:#ff0055; font-weight:bold;">Sintoniza</a>
+                <a href="contacto.html">Contacto</a>
+                <a href="redes-sociales.html">Redes Sociales</a>
+                <a href="donaciones.html">Donaciones</a>
+                <a href="publicidad.html">Publicidad</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-banner">
+        <a href="index.html" class="btn-volver">&lt; VOLVER AL INICIO</a>
+        <h1>Directorios y Portales de Sintonía</h1>
+        <p>Encuentra nuestras señales en los principales agregadores de Colombia y el mundo</p>
+    </section>
+
+    <main class="main-container">
+        <div class="sintoniza-grid">
+            <div class="card-dir">
+                <div style="font-size: 35px;">📻</div>
+                <h3>Radios.com.co</h3>
+                <p>Escúchanos en el directorio #1 de emisoras en Colombia.</p>
+                <a href="https://radios.com.co/super-radio-fm/" target="_blank" class="btn-ver-mas">ABRIR ENLACE</a>
+            </div>
+            <div class="card-dir">
+                <div style="font-size: 35px;">🇨🇴</div>
+                <h3>Colombia.com</h3>
+                <p>Señal oficial presente en el portal nacional de medios.</p>
+                <a href="https://www.colombia.com/radio/super-radio-fm-pereira-6373" target="_blank" class="btn-ver-mas">ABRIR ENLACE</a>
+            </div>
+            <div class="card-dir">
+                <div style="font-size: 35px;">🎧</div>
+                <h3>Online Radio Box</h3>
+                <p>Acceso directo al flujo de audio en alta fidelidad.</p>
+                <a href="https://onlineradiobox.com/co/super/?cs=co.super&played=1" target="_blank" class="btn-ver-mas">ABRIR ENLACE</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer-rcn"><p style="text-align:center; padding: 20px; color: #666;">&copy; 2026 S.C.I. Super Cadena Independiente.</p></footer>
+
+</body>
+</html>
