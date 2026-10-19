@@ -418,3 +418,198 @@
         <div class="info-programa">
             <h2>Estudio Principal en Vivo</h2>
             <p>Disfruta de la mejor programación rock
+                     <div>
+                <a href="#" class="btn-escuchar">▶ ESCUCHAR EN VIVO</a>
+                <select id="selectorCiudad" class="select-ciudad" onchange="cambiarFlujoAudio(this)">
+                    <option value="https://usa15.fastcast4u.com/proxy/superradiofm?mp=/1" selected>Pereira (Sede Principal)</option>
+                    <option value="https://usa15.fastcast4u.com/proxy/superradiofm?mp=/1">Bogotá</option>
+                    <option value="https://usa15.fastcast4u.com/proxy/superradiofm?mp=/1">Medellín</option>
+                    <option value="https://usa15.fastcast4u.com/proxy/superradiofm?mp=/1">Cali</option>
+                </select>
+            </div>
+        </div>
+    </main>
+    <h3>A continuación: </h3>
+
+    <!-- BARRA REPRODUCTOR FLOTANTE INFERIOR -->
+    <div id="barraFlotante" class="reproductor-flotante">
+        <div class="fondo-difuminado-blur"></div>
+        
+        <div class="contenedor-botones-superiores">
+            <button id="btnMinimizar" class="btn-minimizar" title="Expandir / Minimizar">▲</button>
+        </div>
+
+        <div class="vista-ampliada-contenido">
+            <img src="basica.png" alt="Carátula Emisora">
+            
+            <div class="tiempo-streaming-container">
+                <div class="tiempos-labels">
+                    <span id="horaActualStream">10:59</span>
+                    <span id="horaFinStream">11:30</span>
+                </div>
+                <input type="range" id="barraProgresoInteractiva" class="barra-progreso-interactiva" min="0" max="100" value="0" step="0.1" title="Progreso del bloque">
+            </div>
+
+            <div class="badge-aire-pill"><span></span> Al aire</div>
+            <h3 id="infoTextoCiudadAmplia">Super Radio Fm - Pereira (Sede Principal)</h3>
+        </div>
+
+        <div class="player-info-left">
+            <img src="basica.png" alt="S.C.I. Logo">
+            <div class="player-text-meta">
+                <h4 id="infoTextoCiudad">Super Radio Fm - Pereira (Sede Principal)</h4>
+                <p>● Al aire - Transmisión en directo</p>
+            </div>
+        </div>
+
+        <div class="player-controls-center">
+            <div class="volumen-container" id="volumenContainer">
+                <button class="btn-control-aux" id="btnToggleVolumen" title="Ajustar Volumen">🔊</button>
+                <div class="slider-volumen-flotante" id="sliderVolumenFlotante">
+                    <input type="range" id="volumenVertical" min="0" max="1" step="0.05" value="1" title="Nivel de volumen">
+                </div>
+            </div>
+            
+            <button class="btn-control-aux" id="btnRetroceder" title="Retroceder">⏮</button>
+            <button class="btn-player-circle" id="btnPlayBarra" title="Reproducir / Pausar">▶</button>
+            <button class="btn-control-aux" id="btnAdelantar" title="Adelantar">⏭</button>
+            <button class="btn-control-aux" id="btnCompartir" title="Compartir enlace">🔗</button>
+        </div>
+
+        <div class="player-extra-right"></div>
+    </div>
+
+    <audio id="streamAudio" src="https://usa15.fastcast4u.com/proxy/superradiofm?mp=/1" preload="none"></audio>
+
+    <script>
+        const selectCiudad = document.getElementById('selectorCiudad');
+        const etiquetaAudio = document.getElementById('streamAudio');
+        const barraFlotante = document.getElementById('barraFlotante');
+        const btnEscucharPrincipal = document.querySelector('.btn-escuchar');
+        const btnPlayBarra = document.getElementById('btnPlayBarra');
+        const btnToggleVolumen = document.getElementById('btnToggleVolumen');
+        const sliderVolumenFlotante = document.getElementById('sliderVolumenFlotante');
+        const volumenVertical = document.getElementById('volumenVertical');
+        const btnRetroceder = document.getElementById('btnRetroceder');
+        const btnAdelantar = document.getElementById('btnAdelantar');
+        const btnCompartir = document.getElementById('btnCompartir');
+        const infoTextoCiudad = document.getElementById('infoTextoCiudad');
+        const infoTextoCiudadAmplia = document.getElementById('infoTextoCiudadAmplia');
+        const btnMinimizar = document.getElementById('btnMinimizar');
+        
+        const horaActualStream = document.getElementById('horaActualStream');
+        const horaFinStream = document.getElementById('horaFinStream');
+        const barraProgresoInteractiva = document.getElementById('barraProgresoInteractiva');
+
+        let urlAudioActual = selectCiudad.value;
+        let estaAmpliado = false;
+        let usuarioArrastrando = false;
+
+        barraProgresoInteractiva.addEventListener('mousedown', () => { usuarioArrastrando = true; });
+        barraProgresoInteractiva.addEventListener('mouseup', () => { usuarioArrastrando = false; });
+        barraProgresoInteractiva.addEventListener('touchstart', () => { usuarioArrastrando = true; });
+        barraProgresoInteractiva.addEventListener('touchend', () => { usuarioArrastrando = false; });
+
+        function actualizarRelojStreaming() {
+            const ahora = new Date();
+            let h = ahora.getHours();
+            let m = ahora.getMinutes();
+            let s = ahora.getSeconds();
+            
+            let horaActualTexto = (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m;
+            let mFin = m < 30 ? 30 : 0;
+            let hFin = m < 30 ? h : (h + 1) % 24;
+            let horaFinTexto = (hFin < 10 ? "0" : "") + hFin + ":" + (mFin === 0 ? "00" : "30");
+
+            horaActualStream.textContent = horaActualTexto;
+            horaFinStream.textContent = horaFinTexto;
+
+            if (!usuarioArrastrando) {
+                let segundosEnBloque = ((m % 30) * 60) + s;
+                let porcentaje = (segundosEnBloque / 1800) * 100;
+                barraProgresoInteractiva.value = Math.min(100, Math.max(0, porcentaje));
+            }
+        }
+
+        setInterval(actualizarRelojStreaming, 1000);
+        actualizarRelojStreaming();
+
+        btnRetroceder.addEventListener('click', function() {
+            let valorActual = parseFloat(barraProgresoInteractiva.value);
+            barraProgresoInteractiva.value = Math.max(0, valorActual - 5);
+        });
+
+        btnAdelantar.addEventListener('click', function() {
+            let valorActual = parseFloat(barraProgresoInteractiva.value);
+            barraProgresoInteractiva.value = Math.min(100, valorActual + 5);
+        });
+
+        function cambiarFlujoAudio(selectElement) {
+            urlAudioActual = selectElement.value;
+            etiquetaAudio.src = urlAudioActual;
+            let nombreCiudad = selectElement.options[selectElement.selectedIndex].text;
+            infoTextoCiudad.textContent = "Super Radio Fm - " + nombreCiudad;
+            infoTextoCiudadAmplia.textContent = "Super Radio Fm - " + nombreCiudad;
+            if (!etiquetaAudio.paused) etiquetaAudio.play();
+        }
+
+        function alternarReproduccion() {
+            if (etiquetaAudio.paused) {
+                etiquetaAudio.play().then(() => {
+                    barraFlotante.classList.add('visible');
+                    btnEscucharPrincipal.textContent = "⏸ PAUSAR SEÑAL";
+                    btnPlayBarra.textContent = "⏸";
+                }).catch(err => console.log(err));
+            } else {
+                etiquetaAudio.pause();
+                barraFlotante.classList.remove('visible');
+                barraFlotante.classList.remove('ampliado');
+                estaAmpliado = false;
+                btnMinimizar.textContent = "▲";
+                sliderVolumenFlotante.classList.remove('activo');
+                btnEscucharPrincipal.textContent = "▶ ESCUCHAR EN VIVO";
+                btnPlayBarra.textContent = "▶";
+            }
+        }
+
+        btnEscucharPrincipal.addEventListener('click', (e) => { e.preventDefault(); alternarReproduccion(); });
+        btnPlayBarra.addEventListener('click', (e) => { e.preventDefault(); alternarReproduccion(); });
+
+        btnToggleVolumen.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sliderVolumenFlotante.classList.toggle('activo');
+        });
+
+        sliderVolumenFlotante.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        window.addEventListener('click', () => {
+            sliderVolumenFlotante.classList.remove('activo');
+        });
+
+        volumenVertical.addEventListener('input', () => {
+            etiquetaAudio.volume = volumenVertical.value;
+            etiquetaAudio.muted = false;
+            btnToggleVolumen.textContent = volumenVertical.value == 0 ? "🔇" : "🔊";
+        });
+
+        btnMinimizar.addEventListener('click', () => {
+            estaAmpliado = !estaAmpliado;
+            if (estaAmpliado) {
+                barraFlotante.classList.add('ampliado');
+                btnMinimizar.textContent = "▼";
+            } else {
+                barraFlotante.classList.remove('ampliado');
+                btnMinimizar.textContent = "▲";
+            }
+        });
+
+        btnCompartir.addEventListener('click', () => {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert("¡Enlace copiado al portapapeles!");
+            });
+        });
+    </script>
+</body>
+</html>
